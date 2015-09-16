@@ -1,0 +1,41 @@
+e7faed247dbef7f3dce2ea81b783c3008b2a16f2		branch '0.2.1' of https://github.com/rodjek/puppet-lint
+b23390a95c4416377f5cb8c034ebc2ff23e960d4		branch 'docs' of https://github.com/rodjek/puppet-lint
+1664550891b24b70cf0515d0488b41099f585c79		branch 'dust_bunny' of https://github.com/rodjek/puppet-lint
+41405bcc245fa084a1014243a4ea3bb48ce5fb4d		branch 'fix_stuff' of https://github.com/rodjek/puppet-lint
+d589a5f6caa41097320195e1104ac818e2e0debd		branch 'gh-pages' of https://github.com/rodjek/puppet-lint
+16486e7d2cc564fe51e915d78dd060616164fadd		branch 'issue-217' of https://github.com/rodjek/puppet-lint
+beccafd5bb69b73692bcd7d9e798d47643a915ac		branch 'issue-248' of https://github.com/rodjek/puppet-lint
+1cf7bc224f21be647a748e87bf25fdf0f963fc3b		branch 'issue-409' of https://github.com/rodjek/puppet-lint
+60e686919d30accb1beee352d216591e83010dec		branch 'lexer-monkey-patch' of https://github.com/rodjek/puppet-lint
+2546fed6be894bbcff15c3f48d4b6f6bc15d94d1		branch 'master' of https://github.com/rodjek/puppet-lint
+adc01bb58d300558a29fdc12880c8ddc996a5ae2		branch 'modularise' of https://github.com/rodjek/puppet-lint
+760d1b41ebf14e646719c96b1d70a6289ad03903		branch 'y_u_so_slow' of https://github.com/rodjek/puppet-lint
+3764939243f4b5ff3f994f853d2f52e3e73d3d54	not-for-merge	tag '0.0.1' of https://github.com/rodjek/puppet-lint
+bfd62554b9ce775061a628d394a0ff2a1ee8a9cf	not-for-merge	tag '0.0.2' of https://github.com/rodjek/puppet-lint
+65f985dccd2c35379b0035a043ff703bfb1514a3	not-for-merge	tag '0.0.3' of https://github.com/rodjek/puppet-lint
+63dfc61564d88381a4360b730e5e9bc1184ffb48	not-for-merge	tag '0.0.4' of https://github.com/rodjek/puppet-lint
+1cb663b04b257df6f180f9a9033603629435a4cc	not-for-merge	tag '0.0.5' of https://github.com/rodjek/puppet-lint
+8f9e58e539c38a118f3665717cec12ef4155e119	not-for-merge	tag '0.0.6' of https://github.com/rodjek/puppet-lint
+6106a779d41aa15b066bc3f0bc861c9362dae1d6	not-for-merge	tag '0.0.7' of https://github.com/rodjek/puppet-lint
+5900b3f571668f72cae0eda7ead2282bae7d646b	not-for-merge	tag '0.1.0' of https://github.com/rodjek/puppet-lint
+71ff766d88b0c40f1da71850a0da54f625a6cccd	not-for-merge	tag '0.1.1' of https://github.com/rodjek/puppet-lint
+2279e93b3f5588b7a960e8084fc0f456e2a60711	not-for-merge	tag '0.1.10' of https://github.com/rodjek/puppet-lint
+27fc7f7cbb549a595c11e7ebb165ffffeb4e4568	not-for-merge	tag '0.1.11' of https://github.com/rodjek/puppet-lint
+3dcdd0ed0a1a357492d50abb8295a8c1b56a904d	not-for-merge	tag '0.1.12' of https://github.com/rodjek/puppet-lint
+b07fca3654f20578de88aa98b48c0fffb8954888	not-for-merge	tag '0.1.13' of https://github.com/rodjek/puppet-lint
+e76482900314d41cc890445d336169032ac87297	not-for-merge	tag '0.1.2' of https://github.com/rodjek/puppet-lint
+a1f8a6273bc127184d8bcfa00d5dec411b4b2aba	not-for-merge	tag '0.1.3' of https://github.com/rodjek/puppet-lint
+68782cada7031a477470ced39f55cd20937d544c	not-for-merge	tag '0.1.4' of https://github.com/rodjek/puppet-lint
+299e41056a3130b8a50eb7a907f57190a3739785	not-for-merge	tag '0.1.7' of https://github.com/rodjek/puppet-lint
+a7fce7c93cc2764351941934851d85418b259df9	not-for-merge	tag '0.1.8' of https://github.com/rodjek/puppet-lint
+2eb344d1cd22e69fc379155ab717460964f2928e	not-for-merge	tag '0.1.9' of https://github.com/rodjek/puppet-lint
+9988eff59967d01751bd990880bd0fae74d6c92f	not-for-merge	tag '0.2.0' of https://github.com/rodjek/puppet-lint
+a3a3580b735a1181ba46c2fd2401664e67844341	not-for-merge	tag '0.2.0.pre1' of https://github.com/rodjek/puppet-lint
+b3eb342c9d54b4c82fccd49236a9878cc26d90ed	not-for-merge	tag '0.2.1' of https://github.com/rodjek/puppet-lint
+a8cb2d13733a0b0b7cf921cf8db9e2ca965b456f	not-for-merge	tag '0.3.0' of https://github.com/rodjek/puppet-lint
+91b786d876649c429ec4b5b456c76fa39781e220	not-for-merge	tag '0.3.1' of https://github.com/rodjek/puppet-lint
+e740bd739baa42e8ffaa97b37a15981cffb89725	not-for-merge	tag '0.3.2' of https://github.com/rodjek/puppet-lint
+d8f6ae52b7d5a40017992252c4d927e3695385b5	not-for-merge	tag '0.4.0.pre1' of https://github.com/rodjek/puppet-lint
+c5ddabde4ec06bcb641906a4d11e164b986b396e	not-for-merge	tag '1.0.0' of https://github.com/rodjek/puppet-lint
+a2621c97051af7052d56571f0384e778fc806bf1	not-for-merge	tag '1.0.1' of https://github.com/rodjek/puppet-lint
+879b7ebc12b66334b05e52be9655d396997039b9	not-for-merge	tag '1.1.0' of https://github.com/rodjek/puppet-lint
