@@ -1,6 +1,0 @@
-*.gem
-*.swp
-Gemfile.lock
-.vagrant/
-.bundle/
-coverage/
