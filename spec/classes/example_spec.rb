@@ -22,8 +22,10 @@ describe 'suricata' do
           it { is_expected.to contain_class('suricata::service') }
 
           it { is_expected.to contain_service('suricata') }
-          it { is_expected.to contain_package('suricata').with_ensure('present') }
 
+          it { is_expected.to contain_package('suricata').with_ensure('installed') }
+          it { is_expected.to contain_package('ethtool').with_ensure('installed') }
+          it { is_expected.to contain_package('libhtp1').with_ensure('installed') }
         end
       end
     end
