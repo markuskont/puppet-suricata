@@ -39,46 +39,29 @@ class suricata::config {
     command => "/sbin/ifconfig ${suricata::monitor_interface} mtu 9261",
     unless  => "/sbin/ifconfig ${suricata::monitor_interface} | grep 'MTU:9261'",
   }
-
 # enable interface
   exec { 'set_enable':
     command => "/sbin/ifconfig ${suricata::monitor_interface} up",
     unless  => "/sbin/ifconfig ${suricata::monitor_interface} | grep 'UP'",
   }
-
-
-# set max mtu size on monitor interface
-# ifconfig em1 mtu 9216
-# set max ring size
-# ethtool -G eth3 rx 4096
-# add kernel parameters
-# sysctl -w net.core.netdev_max_backlog=250000
-# sysctl -w net.core.rmem_max = 16777216
-# sysctl -w net.core.rmem_max=16777216
-# sysctl -w net.core.rmem_default=16777216
-# sysctl -w net.core.optmem_max=16777216
-# suricata metrics to watch
-# http://pevma.blogspot.nl/2014/08/suricata-flows-flow-managers-and-effect.html
+# create logdir
   file{ 'logdir':
     ensure => directory,
     path   => '/var/log/suricata',
   } ~>
-
+# create suricata configs
   file{ 'classification.config':
     path    => '/etc/suricata/classification.config',
     content => template('suricata/classification.config.erb'),
   } ~>
-
   file{ 'reference.config':
     path    => '/etc/suricata/reference.config',
     content => template('suricata/reference.config.erb'),
   } ~>
-
   file{ 'suricata-default':
     path    => '/etc/default/suricata',
     content => template('suricata/suricata-default.erb'),
   } ~>
-
   file{ 'suricata.yaml':
     path    => '/etc/suricata/suricata.yaml',
     content => template('suricata/suricata.yaml.erb'),

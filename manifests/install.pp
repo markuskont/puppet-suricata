@@ -2,14 +2,17 @@
 #
 class suricata::install {
 
-  apt::ppa{ 'ppa:oisf/suricata-stable': } ~>
+  apt::ppa{ 'ppa:oisf/suricata-stable': } ->
 
   package { $suricata::package_name:
-    ensure => present,
+    ensure => latest,
   }
   # install ethtool
   package { 'ethtool':
-    ensure => installed,
+    ensure => latest,
   }
-
+  # install http lib
+  package { 'libhtp1':
+    ensure => latest,
+  }
 }
