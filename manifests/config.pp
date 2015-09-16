@@ -34,6 +34,18 @@ class suricata::config {
     command => "/sbin/ifconfig ${suricata::monitor_interface} promisc",
     unless  => "/sbin/ifconfig ${suricata::monitor_interface} | grep 'PROMISC'",
   }
+# set mtu size 
+  exec { 'set_mtusize':
+    command => "/sbin/ifconfig ${suricata::monitor_interface} mtu 9261",
+    unless  => "/sbin/ifconfig ${suricata::monitor_interface} | grep 'MTU:9261'",
+  }
+
+# enable interface
+  exec { 'set_enable':
+    command => "/sbin/ifconfig ${suricata::monitor_interface} up",
+    unless  => "/sbin/ifconfig ${suricata::monitor_interface} | grep 'UP'",
+  }
+
 
 # set max mtu size on monitor interface
 # ifconfig em1 mtu 9216
