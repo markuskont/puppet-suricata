@@ -55,12 +55,12 @@ outputs:
       limit: 1000
 
       # If set to a value will enable ring buffer mode. Will keep Maximum of "max_files" of size "limit"
-      max_files: 2000
+      max-files: 2000
 
       mode: normal # normal or sguil.
       #dir: /nsm_data/
       #ts_format: usec # sec or usec second format (default) is filename.sec usec is filename.sec.usec
-      use_stream_depth: no #If set to "yes" packets seen after reaching stream inspection depth are ignored. "no" logs all packets
+      use-stream-depth: no #If set to "yes" packets seen after reaching stream inspection depth are ignored. "no" logs all packets
 
   # a full alerts log containing much information for signature writers
   # or for investigating suspected false positives.
@@ -74,8 +74,8 @@ outputs:
   - alert-prelude:
       enabled: no
       profile: suricata
-      log_packet_content: no
-      log_packet_header: yes
+      log-packet-content: no
+      log-packet-header: yes
 
   # Stats.log contains data from various counters of the suricata engine.
   # The interval field (in seconds) tells after how long output will be written
@@ -127,14 +127,14 @@ threshold-file: /etc/suricata/threshold.config
 detect-engine:
   - profile: medium
   - custom-values:
-      toclient_src_groups: 2
-      toclient_dst_groups: 2
-      toclient_sp_groups: 2
-      toclient_dp_groups: 3
-      toserver_src_groups: 2
-      toserver_dst_groups: 4
-      toserver_sp_groups: 2
-      toserver_dp_groups: 25
+      toclient-src-groups: 2
+      toclient-dst-groups: 2
+      toclient-sp-groups: 2
+      toclient-dp-groups: 3
+      toserver-src-groups: 2
+      toserver-dst-groups: 4
+      toserver-sp-groups: 2
+      toserver-dp-groups: 25
   - sgh-mpm-context: auto
   - inspection-recursion-limit: 3000
 
