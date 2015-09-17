@@ -344,7 +344,7 @@ GEM
     slop (3.6.0)
     spdx-licenses (1.0.0)
       json
-    specinfra (2.43.5)
+    specinfra (2.43.6)
       net-scp
       net-ssh (~> 2.7)
       net-telnet
