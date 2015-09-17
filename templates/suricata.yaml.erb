@@ -14,6 +14,20 @@ action-order:
   - alert
 default-log-dir: /var/log/suricata
 outputs:
+  - eve-log:
+      enabled: yes
+      type: file #file|syslog|unix_dgram|unix_stream
+      filename: eve.json
+      types:
+        - alert
+        - http:
+            extended: yes     # enable this for extended logging information
+        - dns
+        - tls:
+            extended: yes     # enable this for extended logging information
+        - files:
+            force-magic: yes   # force logging magic on all logged files
+            force-md5: yes     # force logging of md5 checksums
 
   # a line based alerts log similar to Snort's fast.log
   - fast:
@@ -85,7 +99,6 @@ outputs:
       filename: stats.log
       interval: 8
 
-  # a line based alerts log similar to fast.log into syslog
   - syslog:
       enabled: no
       # reported identity to syslog. If ommited the program name (usually
