@@ -12,6 +12,7 @@ class suricata (
   $service_name = $suricata::params::service_name,
   $monitor_interface = $suricata::params::monitor_interface,
   $ruleset = $suricata::params::ruleset,
+  $oinkcode = $suricata::params::oinkcode,
 ) inherits suricata::params {
 
   include apt
@@ -26,5 +27,6 @@ class suricata (
   } else {
     notice "${monitor_interface} not present"
     notice "Available interfaces: ${::interfaces}"
+    fail('Please use a available interface')
   }
 }
