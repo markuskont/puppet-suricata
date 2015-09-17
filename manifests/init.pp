@@ -11,6 +11,7 @@ class suricata (
   $package_name = $suricata::params::package_name,
   $service_name = $suricata::params::service_name,
   $monitor_interface = $suricata::params::monitor_interface,
+  $ruleset = $suricata::params::ruleset,
 ) inherits suricata::params {
 
   include apt
@@ -18,6 +19,7 @@ class suricata (
   # validate parameters here
   if $suricata::monitor_interface in $::interfaces {
     class { 'suricata::install': } ->
+    class { 'suricata::oinkmaster::install': } ->
     class { 'suricata::config': } ~>
     class { 'suricata::service': } ->
     Class['suricata']

@@ -4,6 +4,7 @@
 # It sets variables according to platform
 #
 class suricata::params {
+  $ruleset = 'emerging'
   case $::osfamily {
     'Debian': {
       $package_name = 'suricata'
