@@ -9,17 +9,15 @@ end
 
 describe 'suricata class' do
 
-  context 'default parameters' do
+  context 'monitor_interface eth0' do
     if ENV['BEAKER'] == 'true'
       # Using puppet_apply as a helper
       it 'should work idempotently with no errors' do
         pp = <<-EOS
-        class { 'suricata': }
+        class { 'suricata': monitor_interface => 'eth0' }
         EOS
 
-        # Run it twice and test for idempotency
         apply_manifest(pp, :catch_failures => true, :future_parser => true)
-        apply_manifest(pp, :catch_changes  => true, :future_parser => true)
       end
     end
 
