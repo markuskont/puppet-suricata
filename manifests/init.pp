@@ -21,6 +21,7 @@ class suricata (
   # validate parameters here
   if $suricata::monitor_interface in $::interfaces {
     class { 'suricata::install': } ->
+    class { 'suricata::scirius::install': } ->
     class { 'suricata::config': } ~>
     class { 'suricata::service': } ->
     Class['suricata']

@@ -66,5 +66,16 @@ class suricata::config {
     path    => '/etc/suricata/suricata.yaml',
     content => template('suricata/suricata.yaml.erb'),
   }
-
+  # create suricataboot.sh
+  file{ 'suricataboot':
+    path    => '/usr/local/bin/suricataboot.sh',
+    content => template('suricata/suricataboot.sh.erb'),
+    mode    => '0544',
+  }
+  # run puppet at startup to configure and run suricata
+  cron { 'suricataboot':
+    command => '/usr/local/bin/suricataboot.sh',
+    user    => root,
+    special => reboot,
+  }
 }
