@@ -23,13 +23,21 @@ describe 'suricata class' do
 
 
     # default module tests
+
+    describe ppa('oisf/suricata-stable') do
+      it { should exist }
+    end
+
     describe package('suricata') do
       it { is_expected.to be_installed }
     end
 
     describe service('suricata') do
-      it { is_expected.to be_enabled }
       it { is_expected.to be_running }
+    end
+
+    describe cron do
+      it { should have_entry('@reboot /usr/local/bin/suricataboot.sh') }
     end
 
   end

@@ -1,7 +1,7 @@
 # == Class suricata::install
 #
 class suricata::install {
-  package { 'python-software-properties':
+  package { ['software-properties-common', 'python-software-properties' ]:
     ensure => installed,
   }
   # install suricata repo

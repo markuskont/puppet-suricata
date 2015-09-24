@@ -28,6 +28,10 @@ describe 'suricata' do
           it { is_expected.to contain_package('ethtool').with_ensure('installed') }
           it { is_expected.to contain_package('libhtp1').with_ensure('installed') }
 
+          it { is_expected.to contain_apt__ppa('ppa:oisf/suricata-stable') }
+
+          it { should contain_file('suricata.yaml') }
+
         end
       end
     end

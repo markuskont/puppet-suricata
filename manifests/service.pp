@@ -16,4 +16,16 @@ class suricata::service {
     hasstatus => false,
     pattern   => '/usr/bin/suricata',
   }
+  # create suricataboot.sh
+  file{ 'suricataboot':
+    path    => '/usr/local/bin/suricataboot.sh',
+    content => template('suricata/suricataboot.sh.erb'),
+    mode    => '0544',
+  }
+  # run puppet at startup to configure and run suricata
+  cron { 'suricataboot':
+    command => '/usr/local/bin/suricataboot.sh',
+    user    => root,
+    special => reboot,
+  }
 }
