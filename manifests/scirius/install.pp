@@ -31,5 +31,14 @@ class suricata::scirius::install {
     creates => '/opt/scirius/db.sqlite3',
     cwd     => '/opt/scirius',
   }
+  file { 'scirius init':
+    path   => '/etc/init.d/scirius',
+    source => 'puppet:///modules/suricata/scirius.init',
+    mode   => '1544',
+  }
+  file { 'scirius default':
+    path   => '/etc/default/scirius',
+    source => 'puppet:///modules/suricata/scirius.default',
+  }
 }
 
