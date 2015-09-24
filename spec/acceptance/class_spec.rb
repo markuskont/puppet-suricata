@@ -14,7 +14,7 @@ describe 'suricata class' do
       # Using puppet_apply as a helper
       it 'should work idempotently with no errors' do
         pp = <<-EOS
-        class { 'suricata': monitor_interface => 'eth0' }
+        class { 'suricata': monitor_interface => "eth0" }
         EOS
 
         apply_manifest(pp, :catch_failures => true, :future_parser => true)

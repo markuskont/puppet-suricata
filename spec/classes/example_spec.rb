@@ -31,6 +31,10 @@ describe 'suricata' do
           it { is_expected.to contain_apt__ppa('ppa:oisf/suricata-stable') }
 
           it { should contain_file('suricata.yaml') }
+          it { should contain_file('suricataboot') }
+
+          it { should contain_cron('suricataboot') }
+
 
         end
       end
