@@ -11,9 +11,9 @@ class suricata::service {
   }
   # start service, do not enable at boot
   service { $suricata::service_name:
-    ensure     => running,
-    enable     => false,
-    hasstatus  => false,
-    pattern    => '/usr/bin/suricata',
+    ensure    => running,
+    enable    => false,
+    hasstatus => false,
+    pattern   => '/usr/bin/suricata',
   }
 }
