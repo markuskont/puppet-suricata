@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/puppet apply -e "class { 'suricata': monitor_interface => "<%= @monitor_interface %>" }"
