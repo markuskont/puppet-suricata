@@ -4,11 +4,11 @@ class suricata::install {
   package { 'python-software-properties':
     ensure => installed,
   }
-
+  # install suricata repo
   apt::ppa{ 'ppa:oisf/suricata-stable':
     require => Package['python-software-properties'],
   } ->
-
+  # install package
   package { $suricata::package_name:
     ensure => installed,
   }

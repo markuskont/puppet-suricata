@@ -5,6 +5,7 @@
 #
 class suricata::params {
   $ruleset = 'emerging'
+  $threads = $processorcount
   case $::osfamily {
     'Debian': {
       $package_name = 'suricata'

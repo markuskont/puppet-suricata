@@ -116,8 +116,8 @@ outputs:
 # af-packet support
 # Set threads to > 1 to use PACKET_FANOUT support
 af-packet:
-  - interface: eth1
-    threads: 2
+  - interface: <%= @monitor_interface %>
+    threads: <%= @threads %>
     cluster-id: 99
     cluster-type: cluster_cpu
     defrag: yes

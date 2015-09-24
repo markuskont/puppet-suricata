@@ -4,16 +4,16 @@
 # It ensure the service is running
 #
 class suricata::service {
-# service irqbalance stop
+  # service irqbalance stop
   service { 'irqbalance':
     ensure => stopped,
     enable => false,
   }
-
+  # start service, do not enable at boot
   service { $suricata::service_name:
     ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
+    enable     => false,
+    hasstatus  => false,
+    pattern    => '/usr/bin/suricata',
   }
 }
