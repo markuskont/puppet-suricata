@@ -1,0 +1,9 @@
+fixtures:
+  repositories:
+    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    apt: "git://github.com/puppetlabs/puppetlabs-apt"
+    vcsrepo: "https://github.com/puppetlabs/puppetlabs-vcsrepo" 
+
+# default module layout
+  symlinks:
+    suricata: "#{source_dir}"
