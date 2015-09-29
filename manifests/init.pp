@@ -24,6 +24,7 @@ class suricata (
     class { 'suricata::scirius::install': } ->
     class { 'suricata::config': } ~>
     class { 'suricata::service': } ->
+    class { 'suricata::scirius::service': } ->
     Class['suricata']
   } else {
     notice "${monitor_interface} not present"

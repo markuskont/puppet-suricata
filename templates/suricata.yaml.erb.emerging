@@ -1,0 +1,359 @@
+%YAML 1.1
+---
+
+# Suricata configuration file. In addition to the comments describing all
+# options in this file, full documentation can be found at:
+# https://redmine.openinfosecfoundation.org/projects/suricata/wiki/Suricatayaml
+max-pending-packets: 50
+runmode: workers
+default-packet-size: 1514
+action-order:
+  - pass
+  - drop
+  - reject
+  - alert
+default-log-dir: /var/log/suricata
+outputs:
+  - eve-log:
+      enabled: yes
+      type: file #file|syslog|unix_dgram|unix_stream
+      filename: eve.json
+      types:
+        - alert
+        - http:
+            extended: yes     # enable this for extended logging information
+        - dns
+        - tls:
+            extended: yes     # enable this for extended logging information
+        - files:
+            force-magic: yes   # force logging magic on all logged files
+            force-md5: yes     # force logging of md5 checksums
+
+  # a line based alerts log similar to Snort's fast.log
+  - fast:
+      enabled: no
+      filename: fast.log
+      append: yes
+
+  - file-log:
+      enabled: no
+      filename: files-json.log
+      append: yes
+
+  # alert output for use with Barnyard2
+  - unified2-alert:
+      enabled: no
+      filename: unified2.alert
+
+      # Limit in MB.
+      #limit: 32
+
+  # a line based log of HTTP requests (no alerts)
+  - http-log:
+      enabled: no
+      filename: http.log
+      append: yes
+      #extended: yes # enable this for extended logging information
+
+  # a line based log to used with pcap file study.
+  - pcap-info:
+      enabled: no
+
+  # Packet log... log packets in pcap format. 2 modes of operation: "normal"
+  # and "sguil".
+  - pcap-log:
+      enabled:  no
+      filename: log.pcap
+
+      # Limit in MB.
+      limit: 1000
+
+      # If set to a value will enable ring buffer mode. Will keep Maximum of "max_files" of size "limit"
+      max-files: 2000
+
+      mode: normal # normal or sguil.
+      #dir: /nsm_data/
+      #ts_format: usec # sec or usec second format (default) is filename.sec usec is filename.sec.usec
+      use-stream-depth: no #If set to "yes" packets seen after reaching stream inspection depth are ignored. "no" logs all packets
+
+  # a full alerts log containing much information for signature writers
+  # or for investigating suspected false positives.
+  - alert-debug:
+      enabled: no
+      filename: alert-debug.log
+      append: yes
+
+  # alert output to prelude (http://www.prelude-technologies.com/) only
+  # available if Suricata has been compiled with --enable-prelude
+  - alert-prelude:
+      enabled: no
+      profile: suricata
+      log-packet-content: no
+      log-packet-header: yes
+
+  # Stats.log contains data from various counters of the suricata engine.
+  # The interval field (in seconds) tells after how long output will be written
+  # on the log file.
+  - stats:
+      enabled: yes
+      filename: stats.log
+      interval: 8
+
+  - syslog:
+      enabled: no
+      # reported identity to syslog. If ommited the program name (usually
+      # suricata) will be used.
+      #identity: "suricata"
+      facility: local5
+      #level: Info ## possible levels: Emergency, Alert, Critical,
+                   ## Error, Warning, Notice, Info, Debug
+  # a line based information for dropped packet
+  - drop:
+      enabled: yes
+      filename: drop.log
+      append: yes
+
+# af-packet support
+# Set threads to > 1 to use PACKET_FANOUT support
+af-packet:
+  - interface: eth1
+    threads: 2
+    cluster-id: 99
+    cluster-type: cluster_cpu
+    defrag: yes
+
+defrag:
+  memcap: 512mb
+  max-frags: 65535
+  prealloc: yes
+  timeout: 60
+
+engine-analysis:
+  rules-fast-pattern: yes
+
+pcre:
+  match-limit: 3500
+  match-limit-recursion: 1500
+
+threshold-file: /etc/suricata/threshold.config
+
+detect-engine:
+  - profile: medium
+  - custom-values:
+      toclient-src-groups: 2
+      toclient-dst-groups: 2
+      toclient-sp-groups: 2
+      toclient-dp-groups: 3
+      toserver-src-groups: 2
+      toserver-dst-groups: 4
+      toserver-sp-groups: 2
+      toserver-dp-groups: 25
+  - sgh-mpm-context: auto
+  - inspection-recursion-limit: 3000
+
+threading:
+  set_cpu_affinity: yes
+  cpu_affinity:
+    - management_cpu_set:
+        cpu: [ "all" ]  # include only these cpus in affinity settings
+        mode: "balanced"
+        prio:
+          default: "low"
+    - detect_cpu_set:
+        cpu: [ "all" ]
+        mode: "exclusive" 
+        prio:
+          default: "high"
+  detect_thread_ratio: 1.5
+
+mpm-algo: ac
+
+pattern-matcher:
+  - b2gc:
+      search_algo: B2gSearchBNDMq
+      hash_size: low
+      bf_size: medium
+  - b2gm:
+      search_algo: B2gSearchBNDMq
+      hash_size: low
+      bf_size: medium
+  - b2g:
+      search_algo: B2gSearchBNDMq
+      hash_size: low
+      bf_size: medium
+  - b3g:
+      search_algo: B3gSearchBNDMq
+      hash_size: low
+      bf_size: medium
+  - wumanber:
+      hash_size: low
+      bf_size: medium
+
+flow:
+  memcap: 33554432
+  hash_size: 65536
+  prealloc: 10000
+  emergency_recovery: 30
+  prune_flows: 5
+
+flow-timeouts:
+
+  default:
+    new: 30
+    established: 300
+    closed: 0
+    emergency_new: 10
+    emergency_established: 100
+    emergency_closed: 0
+  tcp:
+    new: 60
+    established: 3600
+    closed: 120
+    emergency_new: 10
+    emergency_established: 300
+    emergency_closed: 20
+  udp:
+    new: 30
+    established: 300
+    emergency_new: 10
+    emergency_established: 100
+  icmp:
+    new: 30
+    established: 300
+    emergency_new: 10
+    emergency_established: 100
+
+stream:
+  memcap: 33554432              # 32mb
+  checksum_validation: yes      # reject wrong csums
+  inline: no                    # no inline mode
+  reassembly:
+    memcap: 67108864            # 64mb for reassembly
+    depth: 1048576              # reassemble 1mb into a stream
+    toserver_chunk_size: 2560
+    toclient_chunk_size: 2560
+
+logging:
+  default-log-level: info
+  outputs:
+  - console:
+      enabled: yes
+  - file:
+      enabled: yes
+      filename: /var/log/suricata.log
+  - syslog:
+      enabled: no
+      facility: local5
+
+pcap:
+  - interface: eth1
+    buffer-size: 32768
+
+default-rule-path: /etc/suricata/rules/emerging
+rule-files:
+ - botcc.portgrouped.rules
+ - botcc.rules
+ - ciarmy.rules
+ - compromised.rules
+ - decoder-events.rules
+ - drop.rules
+ - dshield.rules
+ - emerging-activex.rules
+ - emerging-attack_response.rules
+ - emerging-chat.rules
+ - emerging-current_events.rules
+ - emerging-deleted.rules
+ - emerging-dns.rules
+ - emerging-dos.rules
+ - emerging-exploit.rules
+ - emerging-ftp.rules
+ - emerging-games.rules
+ - emerging-icmp_info.rules
+ - emerging-icmp.rules
+ - emerging-imap.rules
+ - emerging-inappropriate.rules
+ - emerging-info.rules
+ - emerging-malware.rules
+ - emerging-misc.rules
+ - emerging-mobile_malware.rules
+ - emerging-netbios.rules
+ - emerging-p2p.rules
+ - emerging-policy.rules
+ - emerging-pop3.rules
+ - emerging-rpc.rules
+ - emerging-scada.rules
+ - emerging-scan.rules
+ - emerging-shellcode.rules
+ - emerging-smtp.rules
+ - emerging-snmp.rules
+ - emerging-sql.rules
+ - emerging-telnet.rules
+ - emerging-tftp.rules
+ - emerging-trojan.rules
+ - emerging-user_agents.rules
+ - emerging-voip.rules
+ - emerging-web_client.rules
+ - emerging-web_server.rules
+ - emerging-web_specific_apps.rules
+ - emerging-worm.rules
+ - files.rules
+ - http-events.rules
+ - rbn-malvertisers.rules
+ - rbn.rules
+ - smtp-events.rules
+ - stream-events.rules
+ - tls-events.rules
+ - tor.rules
+
+classification-file: /etc/suricata/rules/emerging/classification.config
+reference-config-file: /etc/suricata/rules/emerging/reference.config
+
+vars:
+  address-groups:
+    HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
+    EXTERNAL_NET: "!$HOME_NET"
+    HTTP_SERVERS: "$HOME_NET"
+    SMTP_SERVERS: "$HOME_NET"
+    SQL_SERVERS: "$HOME_NET"
+    DNS_SERVERS: "$HOME_NET"
+    TELNET_SERVERS: "$HOME_NET"
+    AIM_SERVERS: "$EXTERNAL_NET"
+
+  port-groups:
+    HTTP_PORTS: "80"
+    SHELLCODE_PORTS: "!80"
+    ORACLE_PORTS: 1521
+    SSH_PORTS: 22
+
+host-os-policy:
+  windows: [0.0.0.0/0]
+  bsd: []
+  bsd_right: []
+  old_linux: []
+  linux: [10.0.0.0/8, 192.168.1.100, "8762:2352:6241:7245:E000:0000:0000:0000"]
+  old_solaris: []
+  solaris: ["::1"]
+  hpux10: []
+  hpux11: []
+  irix: []
+  macos: []
+  vista: []
+  windows2k3: []
+
+asn1_max_frames: 256
+
+libhtp:
+   default-config:
+     personality: IDS
+     request_body_limit: 3072
+   server-config:
+     - apache:
+         address: [192.168.1.0/24, 127.0.0.0/8, "::1"]
+         personality: Apache_2_2
+         request_body_limit: 4096
+     - iis7:
+         address:
+           - 192.168.0.0/24
+           - 192.168.10.0/24
+         personality: IIS_7_0
+         request_body_limit: 4096

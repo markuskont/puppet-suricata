@@ -40,5 +40,10 @@ class suricata::scirius::install {
     path   => '/etc/default/scirius',
     source => 'puppet:///modules/suricata/scirius.default',
   }
+  file { 'scirius manage':
+    path    => '/opt/scirius/manage.py',
+    mode    => '0755',
+    require => Vcsrepo['/opt/scirius'],
+  }
 }
 
