@@ -47,8 +47,8 @@ class suricata::scirius::install {
     require => Vcsrepo['/opt/scirius'],
   }
   file { 'create_scirues_rulesdir':
-    path => "/etc/suricata/rules/${suricata::params::scirius_ruleset_name}",
     ensure => directory,
+    path   => "/etc/suricata/rules/${suricata::params::scirius_ruleset_name}",
   }
   # install new db if not exist
   exec { 'initial_syncdb':
