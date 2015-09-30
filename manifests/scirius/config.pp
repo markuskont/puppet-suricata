@@ -15,13 +15,13 @@ class suricata::scirius::config {
     subscribe   => [ File['create scirius expect'], Exec['initial_syncdb'] ],
   }
   exec { 'scirius_ruleset':
-    command     => "/usr/bin/python manage.py addsource $suricata::params::scirius_ruleset_name $suricata::params::scirius_ruleset_url http sigs",
+    command     => "/usr/bin/python manage.py addsource ${suricata::params::scirius_ruleset_name} ${suricata::params::scirius_ruleset_url} http sigs",
     refreshonly => true,
     cwd         => '/opt/scirius',
     subscribe   => [ File['create scirius expect'], Exec['initial_syncdb'] ],
   }
   exec { 'scirius_defaultruleset':
-    command     => "/usr/bin/python manage.py defaultruleset $suricata::params::scirius_ruleset_name",
+    command     => "/usr/bin/python manage.py defaultruleset ${suricata::params::scirius_ruleset_name}",
     refreshonly => true,
     cwd         => '/opt/scirius',
     subscribe   => Exec['scirius_ruleset'],

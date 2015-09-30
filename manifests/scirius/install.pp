@@ -52,5 +52,5 @@ class suricata::scirius::install {
     command => '/usr/bin/python manage.py syncdb --no-initial-data --noinput',
     creates => '/opt/scirius/db.sqlite3',
     cwd     => '/opt/scirius',
-  } 
+  }
 }
