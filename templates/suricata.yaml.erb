@@ -249,53 +249,12 @@ pcap:
   - interface: eth1
     buffer-size: 32768
 
-default-rule-path: /etc/suricata/rules/etpro
+default-rule-path: /etc/suricata/rules/<%= @scirius_ruleset_name %>
 rule-files:
- - ftp.rules
- - policy.rules
- - trojan.rules
- - games.rules
- - pop3.rules
- - user_agents.rules
- - activex.rules
- - rpc.rules
- - attack_response.rules
- - scan.rules
- - voip.rules
- - chat.rules
- - icmp_info.rules
- - info.rules
- - shellcode.rules
- - web_client.rules
- - imap.rules
- - web_server.rules
- - current_events.rules
- - inappropriate.rules
- - smtp.rules
- - web_specific_apps.rules
- - malware.rules
- - snmp.rules
- - worm.rules
- - dns.rules
- - misc.rules
- - sql.rules
- - dos.rules
- - netbios.rules
- - telnet.rules
- - exploit.rules
- - p2p.rules
- - tftp.rules
- - mobile_malware.rules
- - botcc.rules
- - botcc.portgrouped.rules
- - compromised.rules
- - drop.rules
- - dshield.rules
- - tor.rules
- - ciarmy.rules
+ - scirius.rules
 
-classification-file: /etc/suricata/rules/etpro/classification.config
-reference-config-file: /etc/suricata/rules/etpro/reference.config
+classification-file: /etc/suricata/rules/<%= @scirius_ruleset_name %>/classification.config
+reference-config-file: /etc/suricata/rules/<%= @scirius_ruleset_name %>/reference.config
 
 vars:
   address-groups:

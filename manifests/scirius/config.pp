@@ -27,10 +27,16 @@ class suricata::scirius::config {
     subscribe   => Exec['scirius_ruleset'],
   }
   exec { 'scirius_addsuricata':
-    command     => "/bin/sleep 5;/usr/bin/python manage.py addsuricata IDS 'Puppet installed' /etc/suricata/rules/${suricata::params::scirius_ruleset_name} ${suricata::params::scirius_ruleset_name}",
+    command     => "/usr/bin/python manage.py addsuricata ${::hostname} 'Puppet installed' /etc/suricata/rules/${suricata::params::scirius_ruleset_name} ${suricata::params::scirius_ruleset_name}",
     refreshonly => true,
     cwd         => '/opt/scirius',
-    subscribe   => Exec['scirius_ruleset'],
+    subscribe   => Exec['scirius_defaultruleset'],
+  }
+  exec { 'scirius_updatesuricata':
+    command     => '/usr/bin/python manage.py updatesuricata',
+    refreshonly => true,
+    cwd         => '/opt/scirius',
+    subscribe   => Exec['scirius_addsuricata'],
   }
 }
 

@@ -46,7 +46,10 @@ class suricata::scirius::install {
     mode    => '0700',
     require => Vcsrepo['/opt/scirius'],
   }
-
+  file { 'create_scirues_rulesdir':
+    path => "/etc/suricata/rules/${suricata::params::scirius_ruleset_name}",
+    ensure => directory,
+  }
   # install new db if not exist
   exec { 'initial_syncdb':
     command => '/usr/bin/python manage.py syncdb --no-initial-data --noinput',
