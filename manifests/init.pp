@@ -12,8 +12,11 @@ class suricata (
   $service_name = $suricata::params::service_name,
   $monitor_interface = $suricata::params::monitor_interface,
   $threads = $suricata::params::threads,
-  $ruleset = $suricata::params::ruleset,
-  $oinkcode = $suricata::params::oinkcode,
+  $scirius_admin = $suricata::params::scirius_admin,
+  $scirius_admin_pass = $suricata::params::scirius_admin_pass,
+  $scirius_admin_mail = $suricata::params::scirius_admin_mail,
+  $scirius_ruleset_name = $suricata::params::scirius_ruleset_name,
+  $scirius_ruleset_url = $suricata::params::scirius_ruleset_url,
 ) inherits suricata::params {
 
   include apt
@@ -22,6 +25,7 @@ class suricata (
   if $suricata::monitor_interface in $::interfaces {
     class { 'suricata::install': } ->
     class { 'suricata::scirius::install': } ->
+    class { 'suricata::scirius::config': } ->
     class { 'suricata::config': } ~>
     class { 'suricata::service': } ->
     class { 'suricata::scirius::service': } ->
