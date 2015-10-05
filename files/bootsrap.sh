@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 #
-# This bootstraps Puppet on Ubuntu 14.04 LTS.
+# This bootstraps Puppet on Ubuntu 14.04 LTS and deploy this module
+# Usage:
+# wget https://github.com/naturalis/naturalis-suricata/raw/master/files/bootsrap.sh
+# bash bootstrap.sh
 #
 set -e
 
