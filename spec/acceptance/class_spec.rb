@@ -12,7 +12,7 @@ describe 'suricata class' do
   context 'monitor_interface eth0' do
     if ENV['BEAKER'] == 'true'
       # Using puppet_apply as a helper
-      it 'should work idempotently with no errors' do
+      it 'should work with no errors' do
         pp = <<-EOS
         class { 'suricata': monitor_interface => "eth0" }
         EOS

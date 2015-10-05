@@ -3,6 +3,8 @@
 class suricata::scirius::install {
   # install django
   $packages = [
+    'git',
+    'expect',
     'python-django',
     'python-imaging',
     'python-pythonmagick',
@@ -14,11 +16,16 @@ class suricata::scirius::install {
     'python-pyinotify'
   ]
   ensure_packages($packages)
+  # create /opt
+  file { '/opt':
+    ensure => directory,
+  }
   # clone scirius repo
   vcsrepo { '/opt/scirius':
     ensure   => present,
     provider => git,
     source   => 'https://github.com/StamusNetworks/scirius.git',
+    require  => File['/opt'],
   } ~>
   # install requierements
   exec { 'install requirements':
@@ -54,13 +61,14 @@ class suricata::scirius::install {
   file { 'create_scirues_rulesdir':
     ensure  => directory,
     path    => "/etc/suricata/rules/${suricata::params::scirius_ruleset_name}",
-    require => File['rulesdir'],
+    require => [ File['rulesdir'], Vcsrepo['/opt/scirius'] ],
   }
   # install new db if not exist
   exec { 'initial_syncdb':
     command => '/usr/bin/python manage.py syncdb --no-initial-data --noinput',
     creates => '/opt/scirius/db.sqlite3',
     cwd     => '/opt/scirius',
+    require => Vcsrepo['/opt/scirius'],
   }
   # install scirius local settings
   file { 'scirius local settings':
