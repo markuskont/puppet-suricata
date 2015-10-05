@@ -46,6 +46,10 @@ class suricata::scirius::config {
       special => daily,
     }
   }
-
+  cron { 'auto reload suricata':
+    command => "[ -f /etc/suricata/rules/${suricata::params::scirius_ruleset_name}/scirius.reload ] && service suricata restart;rm /etc/suricata/rules/${suricata::params::scirius_ruleset_name}/scirius.reload",
+    user    => root,
+    minute  => '*',
+  }
 }
 
