@@ -31,7 +31,7 @@ apt-get update >/dev/null
 
 # Install git bundler
 echo "Installing git, bundler..."
-apt-get install -y git bundler >/dev/null
+apt-get install -y git bundler zlib1g-dev >/dev/null
 
 # Install the PuppetLabs repo
 echo "Configuring PuppetLabs repo..."
@@ -49,5 +49,8 @@ git clone https://github.com/naturalis/naturalis-suricata.git
 cd naturalis-suricata
 echo "Installing gems"
 bundle install --path vendor/bundle
+echo "Preparing modules"
 bundle exec rake spec_prep
-
+cp -a spec/fixtures/modules/* /etc/puppet/modules/
+echo "Run puppet"
+puppet apply -e "class {'suricata': monitor_interface => "eth1"}"
