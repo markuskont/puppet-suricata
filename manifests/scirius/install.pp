@@ -56,4 +56,10 @@ class suricata::scirius::install {
     creates => '/opt/scirius/db.sqlite3',
     cwd     => '/opt/scirius',
   }
+  # install scirius local settings
+  file { 'scirius local settings':
+    path    => '/opt/scirius/local_settings.py',
+    content => template('suricata/local_settings.py.erb'),
+    require => Vcsrepo['/opt/scirius'],
+  }
 }

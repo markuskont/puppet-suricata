@@ -18,6 +18,11 @@ class suricata (
   $scirius_ruleset_name = $suricata::params::scirius_ruleset_name,
   $scirius_ruleset_url = $suricata::params::scirius_ruleset_url,
   $scirius_ruleset_update = $suricata::params::scirius_ruleset_update,
+  $scirius_es_address = $suricata::params::scirius_es_address,
+  $scirius_es_index = $suricata::params::scirius_es_index,
+  $scirius_kibana_url = $suricata::params::scirius_kibana_url,
+  $scirius_kibana_index = $suricata::params::scirius_kibana_index,
+  $scirius_kibana_version = $suricata::params::scirius_kibana_version,
 ) inherits suricata::params {
 
   include apt

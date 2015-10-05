@@ -12,6 +12,11 @@ class suricata::params {
   $scirius_ruleset_name = 'ETpro'
   $scirius_ruleset_url = 'https://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz'
   $scirius_ruleset_update = true
+  $scirius_es_address = 'localhost:9200'
+  $scirius_es_index = 'logstash-'
+  $scirius_kibana_url = "http://${::ipaddress}:5601"
+  $scirius_kibana_index = '.kibana'
+  $scirius_kibana_version = 4
 
   case $::osfamily {
     'Debian': {
