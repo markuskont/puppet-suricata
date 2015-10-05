@@ -43,5 +43,11 @@ apt-get update >/dev/null
 # Install Puppet
 echo "Installing Puppet..."
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install puppet >/dev/null
-
 echo "Puppet installed!"
+echo "Cloning repo"
+git clone https://github.com/naturalis/naturalis-suricata.git
+cd naturalis-suricata
+echo "Installing gems"
+bundle install --path vendor/bundle
+bundle exec rake spec_prep
+
