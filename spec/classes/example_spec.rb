@@ -33,7 +33,7 @@ describe 'suricata' do
           it { should contain_file('suricata.yaml') }
           it { should contain_file('suricataboot') }
 
-          it { should contain_cron('suricataboot') }
+          it { should contain_cron('suricataboot_cron') }
 
 
         end

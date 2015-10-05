@@ -49,11 +49,6 @@ class suricata::config {
     ensure => directory,
     path   => '/var/log/suricata',
   }
-# create rules dir
-  file{ 'rulesdir':
-    ensure => directory,
-    path   => '/etc/suricata/rules',
-  } 
 # create suricata configs
   file{ 'suricata-default':
     path    => '/etc/default/suricata',
@@ -70,7 +65,7 @@ class suricata::config {
     mode    => '0544',
   }
   # run puppet at startup to configure and run suricata
-  cron { 'suricataboot':
+  cron { 'suricataboot_cron':
     command => '/usr/local/bin/suricataboot.sh',
     user    => root,
     special => reboot,
