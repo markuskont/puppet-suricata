@@ -11,6 +11,7 @@ class suricata::params {
   $scirius_admin_mail = 'admin@dummy.com'
   $scirius_ruleset_name = 'ETpro'
   $scirius_ruleset_url = 'https://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz'
+  $scirius_ruleset_update = true
 
   case $::osfamily {
     'Debian': {

@@ -17,6 +17,7 @@ class suricata (
   $scirius_admin_mail = $suricata::params::scirius_admin_mail,
   $scirius_ruleset_name = $suricata::params::scirius_ruleset_name,
   $scirius_ruleset_url = $suricata::params::scirius_ruleset_url,
+  $scirius_ruleset_update = $suricata::params::scirius_ruleset_update,
 ) inherits suricata::params {
 
   include apt

@@ -38,5 +38,14 @@ class suricata::scirius::config {
     cwd         => '/opt/scirius',
     subscribe   => Exec['scirius_addsuricata'],
   }
+  # auto update ruleset daily
+  if $suricata::params::scirius_ruleset_update == true {
+    cron { 'update rules':
+      command => 'cd /opt/scirius;/usr/bin/python manage.py updatesuricata',
+      user    => root,
+      special => daily,
+    }
+  }
+
 }
 
