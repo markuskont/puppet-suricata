@@ -1,24 +1,21 @@
 # == Class suricata::install
 #
 class suricata::install {
-  package { ['software-properties-common', 'python-software-properties' ]:
-    ensure => installed,
-  }
+  $packages = [
+    'software-properties-common',
+    'python-software-properties',
+    'ethtool',
+    'libhtp1',
+    'python-pyinotify'
+  ]
+  ensure_packages($packages)
   # install suricata repo
   apt::ppa{ 'ppa:oisf/suricata-stable':
     require => Package['python-software-properties'],
-  } ->
+  }
   # install package
   package { $suricata::package_name:
-    ensure => installed,
+    ensure  => installed,
+    require => Apt::Ppa['ppa:oisf/suricata-stable'],
   }
-  # install ethtool
-  package { 'ethtool':
-    ensure => installed,
-  }
-  # install http lib
-  package { 'libhtp1':
-    ensure => installed,
-  }
-
 }
