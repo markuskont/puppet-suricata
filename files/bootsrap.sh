@@ -53,4 +53,4 @@ echo "Preparing modules"
 bundle exec rake spec_prep
 cp -a spec/fixtures/modules/* /etc/puppet/modules/
 echo "Run puppet"
-puppet apply -e "class {'suricata': monitor_interface => "eth1"}"
+puppet apply -e "class {'suricata': monitor_interface => "em2"}"

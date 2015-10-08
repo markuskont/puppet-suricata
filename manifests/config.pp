@@ -35,10 +35,10 @@ class suricata::config {
     unless  => "/sbin/ifconfig ${suricata::monitor_interface} | grep 'PROMISC'",
   }
 # set mtu size 
-  exec { 'set_mtusize':
-    command => "/sbin/ifconfig ${suricata::monitor_interface} mtu 9261",
-    unless  => "/sbin/ifconfig ${suricata::monitor_interface} | grep 'MTU:9261'",
-  }
+#  exec { 'set_mtusize':
+#    command => "/sbin/ifconfig ${suricata::monitor_interface} mtu 9261",
+#    unless  => "/sbin/ifconfig ${suricata::monitor_interface} | grep 'MTU:9261'",
+#  }
 # enable interface
   exec { 'set_enable':
     command => "/sbin/ifconfig ${suricata::monitor_interface} up",
