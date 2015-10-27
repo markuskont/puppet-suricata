@@ -1,5 +1,0 @@
-# Default config for Scirius
-
-# set to yes to start the server in the init.d script
-RUN=yes
-
