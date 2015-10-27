@@ -16,7 +16,7 @@ DAEMON=$DIR/manage.py
 DAEMON_NAME=scirius
 
 # Add any command line options for your daemon here
-DAEMON_OPTS="runserver 0.0.0.0:8000"
+DAEMON_OPTS="runserver 0.0.0.0:<%= @scirius_port %>"
 
 # This next line determines what user the script runs as.
 # Root generally not recommended but necessary if you are using the Raspberry Pi GPIO from Python.

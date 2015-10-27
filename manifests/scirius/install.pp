@@ -35,7 +35,7 @@ class suricata::scirius::install {
   # prepare start scripts
   file { 'scirius init':
     path   => '/etc/init.d/scirius',
-    source => 'puppet:///modules/suricata/scirius.init',
+    content => template('suricata/scirius.init.erb'),
     mode   => '1544',
   }
   file { 'scirius default':

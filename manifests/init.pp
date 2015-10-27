@@ -12,6 +12,7 @@ class suricata (
   $service_name = $suricata::params::service_name,
   $monitor_interface = $suricata::params::monitor_interface,
   $threads = $suricata::params::threads,
+  $scirius_port = $suricata::params::scirius_port,
   $scirius_admin = $suricata::params::scirius_admin,
   $scirius_admin_pass = $suricata::params::scirius_admin_pass,
   $scirius_admin_mail = $suricata::params::scirius_admin_mail,
