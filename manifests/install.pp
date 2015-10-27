@@ -15,7 +15,7 @@ class suricata::install {
   }
   # install package
   package { $suricata::package_name:
-    ensure  => installed,
+    ensure  => latest,
     require => Apt::Ppa['ppa:oisf/suricata-stable'],
   }
 }
