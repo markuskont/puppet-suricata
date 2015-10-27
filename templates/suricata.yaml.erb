@@ -258,7 +258,7 @@ reference-config-file: /etc/suricata/rules/<%= @scirius_ruleset_name %>/referenc
 
 vars:
   address-groups:
-    HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
+    HOME_NET: "[<%= @home_net %>]"
     EXTERNAL_NET: "!$HOME_NET"
     HTTP_SERVERS: "$HOME_NET"
     SMTP_SERVERS: "$HOME_NET"
@@ -278,9 +278,9 @@ host-os-policy:
   bsd: []
   bsd-right: []
   old-linux: []
-  linux: [10.0.0.0/8, 192.168.1.100, "8762:2352:6241:7245:E000:0000:0000:0000"]
+  linux: []
   old-solaris: []
-  solaris: ["::1"]
+  solaris: []
   hpux10: []
   hpux11: []
   irix: []
