@@ -32,7 +32,7 @@ class suricata (
     class { 'suricata::install': } ->
     class { 'suricata::scirius::install': } ->
     class { 'suricata::scirius::config': } ->
-    class { 'suricata::config': } ->
+    class { 'suricata::config': } ~>
     class { 'suricata::service': } ->
     class { 'suricata::scirius::service': } ->
     Class['suricata']
