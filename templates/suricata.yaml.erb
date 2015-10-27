@@ -152,49 +152,49 @@ detect-engine:
   - inspection-recursion-limit: 3000
 
 threading:
-  set_cpu_affinity: yes
-  cpu_affinity:
-    - management_cpu_set:
+  set-cpu-affinity: yes
+  cpu-affinity:
+    - management-cpu-set:
         cpu: [ "all" ]  # include only these cpus in affinity settings
         mode: "balanced"
         prio:
           default: "low"
-    - detect_cpu_set:
+    - detect-cpu-set:
         cpu: [ "all" ]
         mode: "exclusive" 
         prio:
           default: "high"
-  detect_thread_ratio: 1.5
+  detect-thread-ratio: 1.5
 
 mpm-algo: ac
 
 pattern-matcher:
   - b2gc:
-      search_algo: B2gSearchBNDMq
-      hash_size: low
-      bf_size: medium
+      search-algo: B2gSearchBNDMq
+      hash-size: low
+      bf-size: medium
   - b2gm:
-      search_algo: B2gSearchBNDMq
-      hash_size: low
-      bf_size: medium
+      search-algo: B2gSearchBNDMq
+      hash-size: low
+      bf-size: medium
   - b2g:
-      search_algo: B2gSearchBNDMq
-      hash_size: low
-      bf_size: medium
+      search-algo: B2gSearchBNDMq
+      hash-size: low
+      bf-size: medium
   - b3g:
-      search_algo: B3gSearchBNDMq
-      hash_size: low
-      bf_size: medium
+      search-algo: B3gSearchBNDMq
+      hash-size: low
+      bf-size: medium
   - wumanber:
-      hash_size: low
-      bf_size: medium
+      hash-size: low
+      bf-size: medium
 
 flow:
   memcap: 33554432
-  hash_size: 65536
+  hash-size: 65536
   prealloc: 10000
-  emergency_recovery: 30
-  prune_flows: 5
+  emergency-recovery: 30
+  prune-flows: 5
 
 flow-timeouts:
 
@@ -202,36 +202,36 @@ flow-timeouts:
     new: 30
     established: 300
     closed: 0
-    emergency_new: 10
-    emergency_established: 100
-    emergency_closed: 0
+    emergency-new: 10
+    emergency-established: 100
+    emergency-closed: 0
   tcp:
     new: 60
     established: 3600
     closed: 120
-    emergency_new: 10
-    emergency_established: 300
-    emergency_closed: 20
+    emergency-new: 10
+    emergency-established: 300
+    emergency-closed: 20
   udp:
     new: 30
     established: 300
-    emergency_new: 10
-    emergency_established: 100
+    emergency-new: 10
+    emergency-established: 100
   icmp:
     new: 30
     established: 300
-    emergency_new: 10
-    emergency_established: 100
+    emergency-new: 10
+    emergency-established: 100
 
 stream:
   memcap: 33554432              # 32mb
-  checksum_validation: yes      # reject wrong csums
+  checksum-validation: yes      # reject wrong csums
   inline: no                    # no inline mode
   reassembly:
     memcap: 67108864            # 64mb for reassembly
     depth: 1048576              # reassemble 1mb into a stream
-    toserver_chunk_size: 2560
-    toclient_chunk_size: 2560
+    toserver-chunk-size: 2560
+    toclient-chunk-size: 2560
 
 logging:
   default-log-level: info
@@ -276,10 +276,10 @@ vars:
 host-os-policy:
   windows: [0.0.0.0/0]
   bsd: []
-  bsd_right: []
-  old_linux: []
+  bsd-right: []
+  old-linux: []
   linux: [10.0.0.0/8, 192.168.1.100, "8762:2352:6241:7245:E000:0000:0000:0000"]
-  old_solaris: []
+  old-solaris: []
   solaris: ["::1"]
   hpux10: []
   hpux11: []
@@ -288,20 +288,20 @@ host-os-policy:
   vista: []
   windows2k3: []
 
-asn1_max_frames: 256
+asn1-max-frames: 256
 
 libhtp:
    default-config:
      personality: IDS
-     request_body_limit: 3072
+     request-body-limit: 3072
    server-config:
      - apache:
          address: [192.168.1.0/24, 127.0.0.0/8, "::1"]
          personality: Apache_2_2
-         request_body_limit: 4096
+         request-body-limit: 4096
      - iis7:
          address:
            - 192.168.0.0/24
            - 192.168.10.0/24
          personality: IIS_7_0
-         request_body_limit: 4096
+         request-body-limit: 4096
