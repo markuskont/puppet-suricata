@@ -6,7 +6,7 @@ class suricata::install {
     'python-software-properties',
     'ethtool',
     'libhtp1',
-    'python-pyinotify'
+    'python-pyinotify',
   ]
   ensure_packages($packages)
   # install suricata repo
