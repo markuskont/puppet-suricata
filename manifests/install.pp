@@ -5,7 +5,6 @@ class suricata::install {
     'software-properties-common',
     'python-software-properties',
     'ethtool',
-    'libhtp1',
     'python-pyinotify',
   ]
   ensure_packages($packages)
@@ -21,6 +20,10 @@ class suricata::install {
   }
 
   # install package
+  package {'libhtp1':
+    ensure => latest,
+    require => [ Apt::Ppa['ppa:oisf/suricata-stable'], Exec['apt-update'] ],
+  }
   package { $suricata::package_name:
     ensure  => latest,
     require => [ Apt::Ppa['ppa:oisf/suricata-stable'], Exec['apt-update'] ],
