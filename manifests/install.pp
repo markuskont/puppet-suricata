@@ -12,10 +12,17 @@ class suricata::install {
   # install suricata repo
   apt::ppa{ 'ppa:oisf/suricata-stable':
     require => Package['python-software-properties'],
+  } ~>
+  # update apt
+  exec { 'apt-update':
+    command     => '/usr/bin/apt-get update',
+    require     => Apt::Ppa['ppa:oisf/suricata-stable'],
+    refreshonly => true,
   }
+
   # install package
   package { $suricata::package_name:
     ensure  => latest,
-    require => Apt::Ppa['ppa:oisf/suricata-stable'],
+    require => [ Apt::Ppa['ppa:oisf/suricata-stable'], Exec['apt-update'] ],
   }
 }
