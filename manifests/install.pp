@@ -21,7 +21,7 @@ class suricata::install {
 
   # install package
   package {'libhtp1':
-    ensure => latest,
+    ensure  => latest,
     require => [ Apt::Ppa['ppa:oisf/suricata-stable'], Exec['apt-update'] ],
   }
   package { $suricata::package_name:
