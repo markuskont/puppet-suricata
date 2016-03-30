@@ -36,9 +36,5 @@ describe 'suricata class' do
       it { is_expected.to be_running }
     end
 
-    describe cron do
-      it { should have_entry('@reboot /usr/local/bin/suricataboot.sh') }
-    end
-
   end
 end

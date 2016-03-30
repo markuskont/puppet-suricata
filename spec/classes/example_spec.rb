@@ -47,9 +47,6 @@ describe 'suricata' do
           it { should contain_exec('set_promisc') }
           it { should contain_exec('apt-update') }
 
-          # contain cron
-          it { should contain_cron('suricataboot_cron') }
-
           # contain apt ppa
           it { is_expected.to contain_apt__ppa('ppa:oisf/suricata-stable') }
 
