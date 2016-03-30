@@ -187,7 +187,6 @@ outputs:
 
 # Magic file. The extension .mgc is added to the value here.
 #magic-file: /usr/share/file/magic
-@e_magic_file_comment@magic-file: @e_magic_file@
 
 nfq:
 #  mode: accept
@@ -370,7 +369,6 @@ host:
 
 logging:
   default-log-level: info
-  #default-log-format: "[%i] %t - (%f:%l) <%d> (%n) -- "
   default-output-filter:
   outputs:
   - console:
@@ -378,12 +376,11 @@ logging:
       # type: json
   - file:
       enabled: yes
-      filename: @e_logdir@suricata.log
+      filename: /var/log/suricata/suricata.log
       type: json
   - syslog:
       enabled: no
       facility: local5
-      format: "[%i] <%d> -- "
       # type: json
 
 pcap:
@@ -425,8 +422,8 @@ vars:
     SSH_PORTS: 22
 
 # IP Reputation
-#reputation-categories-file: @e_sysconfdir@iprep/categories.txt
-#default-reputation-path: @e_sysconfdir@iprep
+#reputation-categories-file: 
+#default-reputation-path: 
 #reputation-files:
 # - reputation.list
 
