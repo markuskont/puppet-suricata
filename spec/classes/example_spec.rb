@@ -45,6 +45,7 @@ describe 'suricata' do
           it { should contain_exec('disable_sg') }
           it { should contain_exec('set_enable') }
           it { should contain_exec('set_promisc') }
+          it { should contain_exec('apt-update') }
 
           # contain cron
           it { should contain_cron('suricataboot_cron') }
