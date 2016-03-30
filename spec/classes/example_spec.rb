@@ -33,7 +33,6 @@ describe 'suricata' do
 
           # contain files
           it { should contain_file('suricata.yaml') }
-          it { should contain_file('suricataboot') }
           it { should contain_file('logdir') }
           it { should contain_file('suricata-default') }
 
