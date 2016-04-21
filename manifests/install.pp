@@ -1,6 +1,12 @@
 # == Class suricata::install
 #
 class suricata::install {
+  # prevent direct use of subclass
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
+
+  # install packages
   $packages = [
     'software-properties-common',
     'python-software-properties',
@@ -8,6 +14,7 @@ class suricata::install {
     'python-pyinotify',
   ]
   ensure_packages($packages)
+
   # install suricata repo
   apt::ppa{ 'ppa:oisf/suricata-stable':
     require => Package['python-software-properties'],
@@ -19,7 +26,7 @@ class suricata::install {
     refreshonly => true,
   }
 
-  # install package
+  # install suricata package
   package {'libhtp1':
     ensure  => latest,
     require => [ Apt::Ppa['ppa:oisf/suricata-stable'], Exec['apt-update'] ],
