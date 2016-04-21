@@ -14,10 +14,15 @@ class suricata (
   $scirius_ruleset_name = $suricata::params::scirius_ruleset_name,
   $threads = $suricata::params::threads,
 ) inherits suricata::params {
+  # validate parameters
+  validate_string($package_name)
+  validate_string($service_name)
+  validate_string($monitor_interface)
+  validate_string($scirius_ruleset_name)
+  validate_integer($threads)
 
   include apt
 
-  # validate parameters here
   if $suricata::monitor_interface in $::interfaces {
     class { 'suricata::install': } ->
     class { 'suricata::config': } ~>
