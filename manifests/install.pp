@@ -16,23 +16,46 @@ class suricata::install {
   ensure_packages($packages)
 
   # install suricata repo
-  apt::ppa{ 'ppa:oisf/suricata-stable':
-    require => Package['python-software-properties'],
-  } ~>
-  # update apt
-  exec { 'apt-update':
-    command     => '/usr/bin/apt-get update',
-    require     => Apt::Ppa['ppa:oisf/suricata-stable'],
-    refreshonly => true,
-  }
-
-  # install suricata package
-  package {'libhtp1':
-    ensure  => latest,
-    require => [ Apt::Ppa['ppa:oisf/suricata-stable'], Exec['apt-update'] ],
-  }
-  package { $suricata::package_name:
-    ensure  => latest,
-    require => [ Apt::Ppa['ppa:oisf/suricata-stable'], Exec['apt-update'] ],
+  case $::osfamily {
+    'Debian': {
+      case $::os['release']['major'] {
+        '7': {
+          fail('Libc on wheezy is outdated and thus suricata >= 2 is not supported')
+        }
+        '8': {
+          apt::source { 'oisf':
+            comment     =>  'Suricata OSIF stable repository',
+            location    =>  'http://ppa.launchpad.net/oisf/suricata-stable/ubuntu',
+            release     =>  'xenial',
+            repos       =>  'main',
+            key         =>  {
+              'id'      =>  '9F6FC9DDB1324714B78062CBD7F87B2966EB736F',
+              'server'  =>  'keyserver.ubuntu.com'
+            }
+          } ->
+          # update apt
+          exec { 'apt-update':
+            command     => '/usr/bin/apt-get update',
+            refreshonly => true,
+          } ->
+          # install suricata package
+          package {'libhtp1': ensure  => latest } ->
+          package { $suricata::package_name: ensure  => latest }
+        }
+      }
+    }
+    'Ubuntu': {
+      apt::ppa{ 'ppa:oisf/suricata-stable':
+        require => Package['python-software-properties'],
+      } ->
+      # update apt
+      exec { 'apt-update':
+        command     => '/usr/bin/apt-get update',
+        refreshonly => true,
+      } ->
+      # install suricata package
+      package {'libhtp1': ensure  => latest } ->
+      package { $suricata::package_name: ensure  => latest }
+    }
   }
 }
