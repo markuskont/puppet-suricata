@@ -405,9 +405,17 @@ pcap:
 pcap-file:
   checksum-checks: auto
 
-default-rule-path: /etc/suricata/rules/<%= @scirius_ruleset_name %>
+<%- if @scirius == true -%>
+default-rule-path: <%= @rule_dir %>/<%= @scirius_ruleset_name %>
 rule-files:
  - scirius.rules
+<%- else -%>
+default-rule-path: <%= @rule_dir %>
+rule-files:
+<%- @rule_files.each do | rule_file| -%>
+  - <%= rule_file %>
+<%- end -%>
+<%- end -%>
 
 classification-file: /etc/suricata/rules/<%= @scirius_ruleset_name %>/classification.config
 reference-config-file: /etc/suricata/rules/<%= @scirius_ruleset_name %>/reference.config

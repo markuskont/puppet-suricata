@@ -11,6 +11,9 @@ class suricata (
   $package_name = $suricata::params::package_name,
   $service_name = $suricata::params::service_name,
   $monitor_interface = $suricata::params::monitor_interface,
+  $scirius = $suricata::params::scirius,
+  $rule_dir = $suricata::params::rule_dir,
+  $rule_files = $suricata::params::rule_files,
   $scirius_ruleset_name = $suricata::params::scirius_ruleset_name,
   $threads = $suricata::params::threads,
 ) inherits suricata::params {
