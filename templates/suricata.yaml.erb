@@ -214,6 +214,20 @@ nflog:
 
 # af-packet support
 # Set threads to > 1 to use PACKET_FANOUT support
+<% if @monitor_interface_array %>
+<% id = 99 %>
+<%- @monitor_interface_array.each do | interface| -%>
+<% id = id + 1 %>
+af-packet:
+  - interface: <%= interface %>
+    threads: <%= @threads %>
+    cluster-id: <%= id %>
+    cluster-type: cluster_cpu
+    defrag: yes
+    rollover: yes
+    use-mmap: yes
+<%- end -%>
+<% else %>
 af-packet:
   - interface: <%= @monitor_interface %>
     threads: <%= @threads %>
@@ -228,6 +242,7 @@ af-packet:
     #bpf-filter: port 80 or udp
     #copy-mode: ips
     #copy-iface: eth1
+<% end %>
 
 legacy:
   uricontent: enabled

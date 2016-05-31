@@ -11,6 +11,7 @@ class suricata (
   $package_name = $suricata::params::package_name,
   $service_name = $suricata::params::service_name,
   $monitor_interface = $suricata::params::monitor_interface,
+  $monitor_interface_array = undef,
   $scirius = $suricata::params::scirius,
   $rule_dir = $suricata::params::rule_dir,
   $rule_files = $suricata::params::rule_files,
