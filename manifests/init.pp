@@ -10,6 +10,7 @@
 class suricata (
   $package_name = $suricata::params::package_name,
   $service_name = $suricata::params::service_name,
+  $home_net     = $suricata::params::home_net,
   $monitor_interface = $suricata::params::monitor_interface,
   $monitor_interface_array = undef,
   $scirius = $suricata::params::scirius,
