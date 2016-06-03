@@ -16,7 +16,7 @@ class suricata::install {
   ensure_packages($packages)
 
   # install suricata repo
-  case $::osfamily {
+  case $::os['name'] {
     'Debian': {
       case $::os['release']['major'] {
         '7': {
