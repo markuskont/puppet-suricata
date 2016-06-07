@@ -32,14 +32,12 @@ class suricata::install {
               'id'      =>  '9F6FC9DDB1324714B78062CBD7F87B2966EB736F',
               'server'  =>  'keyserver.ubuntu.com'
             }
-          } ->
-          # update apt
-          exec { 'apt-update':
+          } ~>
+          exec { 'source-apt-update':
             command     => '/usr/bin/apt-get update',
             refreshonly => true,
-          } ->
-          # install suricata package
-          package {'libhtp1': ensure  => latest } ->
+          } ~>
+          package {'libhtp1': ensure  => latest } ~>
           package { $suricata::package_name: ensure  => latest }
         }
       }
@@ -47,14 +45,12 @@ class suricata::install {
     'Ubuntu': {
       apt::ppa{ 'ppa:oisf/suricata-stable':
         require => Package['python-software-properties'],
-      } ->
-      # update apt
-      exec { 'apt-update':
+      } ~>
+      exec { 'ppa-apt-update':
         command     => '/usr/bin/apt-get update',
         refreshonly => true,
-      } ->
-      # install suricata package
-      package {'libhtp1': ensure  => latest } ->
+      } ~>
+      package {'libhtp1': ensure  => latest } ~>
       package { $suricata::package_name: ensure  => latest }
     }
   }
