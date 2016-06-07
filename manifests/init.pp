@@ -28,14 +28,22 @@ class suricata (
 
   include apt
 
-  if $suricata::monitor_interface in $::interfaces {
+  if $suricata::monitor_interface_array {
+    $suricata::monitor_interface_array.each |String $suricata_interface| {
+      if ! $suricata_interface in $::interfaces {
+        notice "${suricata_interface} not present"
+        notice "Available interfaces: ${::interfaces}"
+        fail('Please use a available interface')
+      }
+    }
+  } elsif ! $suricata::monitor_interface in $::interfaces {
+    notice "${monitor_interface} not present"
+    notice "Available interfaces: ${::interfaces}"
+    fail('Please use a available interface')
+  } else {
     class { 'suricata::install': } ->
     class { 'suricata::config': } ~>
     class { 'suricata::service': } ->
     Class['suricata']
-  } else {
-    notice "${monitor_interface} not present"
-    notice "Available interfaces: ${::interfaces}"
-    fail('Please use a available interface')
   }
 }
