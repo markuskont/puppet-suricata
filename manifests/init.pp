@@ -40,10 +40,9 @@ class suricata (
     notice "${monitor_interface} not present"
     notice "Available interfaces: ${::interfaces}"
     fail('Please use a available interface')
-  } else {
-    class { 'suricata::install': } ->
-    class { 'suricata::config': } ~>
-    class { 'suricata::service': } ->
-    Class['suricata']
   }
+  class { 'suricata::install': } ->
+  class { 'suricata::config': } ~>
+  class { 'suricata::service': } ->
+  Class['suricata']
 }
