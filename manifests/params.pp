@@ -55,6 +55,15 @@ class suricata::params {
   $scirius = false
   $scirius_ruleset_name = 'ETpro'
 
+  $log_dns     = false
+  $log_http    = false
+  $log_files   = false
+  $log_tls     = false
+  $log_smtp    = false
+  $log_ssh     = false
+  $log_flow    = false
+  $log_netflow = false
+
   case $::osfamily {
     'Debian': {
       $package_name = 'suricata'
