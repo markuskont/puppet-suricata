@@ -26,7 +26,7 @@ class suricata::install {
           apt::source { 'oisf':
             comment     =>  'Suricata OSIF stable repository',
             location    =>  'http://ppa.launchpad.net/oisf/suricata-stable/ubuntu',
-            release     =>  'xenial',
+            release     =>  'vivid',
             repos       =>  'main',
             key         =>  {
               'id'      =>  '9F6FC9DDB1324714B78062CBD7F87B2966EB736F',
